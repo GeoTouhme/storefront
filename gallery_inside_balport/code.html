@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Balport Liquors - Gallery</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#76d3f0",
+                        "on-tertiary-container": "#364a38",
+                        "on-tertiary-fixed": "#0d1f11",
+                        "on-primary": "#3c2f00",
+                        "on-secondary-fixed-variant": "#004e5f",
+                        "primary-fixed": "#ffe088",
+                        "on-secondary": "#003642",
+                        "surface-container-highest": "#353534",
+                        "tertiary-fixed-dim": "#b6ccb5",
+                        "surface-bright": "#393939",
+                        "on-secondary-container": "#fafdff",
+                        "background": "#131313",
+                        "on-error": "#690005",
+                        "inverse-surface": "#e5e2e1",
+                        "on-primary-fixed-variant": "#574500",
+                        "tertiary-container": "#a2b9a2",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-tertiary": "#223525",
+                        "on-surface": "#e5e2e1",
+                        "error-container": "#93000a",
+                        "secondary-fixed-dim": "#76d3f0",
+                        "primary-fixed-dim": "#e9c349",
+                        "on-primary-container": "#554300",
+                        "on-tertiary-fixed-variant": "#384c3a",
+                        "on-background": "#e5e2e1",
+                        "inverse-on-surface": "#313030",
+                        "on-primary-fixed": "#241a00",
+                        "error": "#ffb4ab",
+                        "primary": "#f2ca50",
+                        "on-error-container": "#ffdad6",
+                        "surface-variant": "#353534",
+                        "tertiary": "#bed5bd",
+                        "secondary-container": "#007f9a",
+                        "on-secondary-fixed": "#001f27",
+                        "surface": "#131313",
+                        "surface-container": "#201f1f",
+                        "tertiary-fixed": "#d1e9d1",
+                        "inverse-primary": "#735c00",
+                        "outline": "#99907c",
+                        "secondary-fixed": "#b3ebff",
+                        "outline-variant": "#4d4635",
+                        "surface-tint": "#e9c349",
+                        "surface-dim": "#131313",
+                        "on-surface-variant": "#d0c5af",
+                        "primary-container": "#d4af37",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-container-low": "#1c1b1b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "base": "8px",
+                        "max-width": "1280px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Playfair Display"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Playfair Display"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Playfair Display"],
+                        "label-sm": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "34px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        
+        /* Custom Masonry Layout fallback */
+        .masonry-grid {
+            column-count: 1;
+            column-gap: 24px;
+        }
+        @media (min-width: 768px) { .masonry-grid { column-count: 2; } }
+        @media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
+        
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 24px;
+        }
+
+        /* Fade-in Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; opacity: 0; }
+        
+        /* Staggered delays */
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="antialiased min-h-screen flex flex-col relative">
+<!-- TopAppBar -->
+<header class="bg-background/95 backdrop-blur-md dark:bg-background/95 fixed top-0 w-full z-50 border-b border-outline-variant/30 shadow-2xl dark:shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop h-20 w-full max-w-max-width mx-auto">
+<div class="flex items-center gap-base text-primary dark:text-primary cursor-pointer active:opacity-80 transition-all hover:scale-105 duration-200">
+<span class="material-symbols-outlined" data-icon="wine_bar" data-weight="fill" style="font-variation-settings: 'FILL' 1;">wine_bar</span>
+</div>
+<div class="font-display-lg text-headline-lg text-primary uppercase tracking-wider hidden md:block">Balport Liquors</div>
+<div class="font-display-lg text-headline-lg-mobile text-primary uppercase tracking-wider md:hidden">Balport Liquors</div>
+<!-- Desktop Nav Items -->
+<nav class="hidden md:flex gap-gutter">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm" href="#">Home</a>
+<a class="text-primary font-semibold border-b-2 border-primary font-label-sm text-label-sm" href="#">Gallery</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm" href="#">Deals</a>
+</nav>
+<div class="flex items-center gap-base text-primary dark:text-primary cursor-pointer active:opacity-80 transition-all md:hidden" id="menu-btn">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</div>
+</div>
+</header>
+<!-- Navigation Drawer (Mobile) -->
+<div class="fixed right-0 top-0 h-screen z-[60] flex flex-col p-base bg-surface-container-high dark:bg-surface-container-high rounded-l-xl w-80 shadow-[20px_0_40px_rgba(0,0,0,0.6)] translate-x-full transition-transform ease-in-out duration-300" id="nav-drawer">
+<div class="flex justify-between items-center mb-gutter border-b border-surface-container-highest pb-base">
+<span class="font-display-lg text-headline-lg text-primary">Balport Liquors</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:bg-surface-variant/50 transition-all rounded-full p-1" id="close-drawer">close</span>
+</div>
+<nav class="flex flex-col gap-base flex-grow">
+<a class="flex items-center gap-base p-2 text-on-surface hover:bg-surface-variant hover:bg-surface-variant/50 transition-all rounded-lg font-body-lg text-body-lg" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+                Home
+            </a>
+<a class="flex items-center gap-base p-2 text-primary bg-primary-container/10 rounded-lg font-body-lg text-body-lg" href="#">
+<span class="material-symbols-outlined" data-icon="gallery_thumbnail">gallery_thumbnail</span>
+                Gallery
+            </a>
+<a class="flex items-center gap-base p-2 text-on-surface hover:bg-surface-variant hover:bg-surface-variant/50 transition-all rounded-lg font-body-lg text-body-lg" href="#">
+<span class="material-symbols-outlined" data-icon="local_offer">local_offer</span>
+                Deals
+            </a>
+</nav>
+</div>
+<!-- Drawer Overlay -->
+<div class="fixed inset-0 bg-black/50 z-50 hidden backdrop-blur-sm transition-opacity" id="drawer-overlay"></div>
+<!-- Main Content -->
+<main class="flex-grow pt-24 pb-gutter px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto w-full">
+<!-- Header Section -->
+<section class="text-center mb-12 fade-in">
+<h1 class="font-display-lg text-display-lg text-on-surface mb-4">Inside Balport</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Explore the curated ambiance, premium selections, and coastal elegance of our flagship location.</p>
+</section>
+<!-- Filters -->
+<section class="flex flex-wrap justify-center gap-4 mb-12 fade-in delay-100">
+<button class="px-4 py-2 rounded-full border border-primary/20 bg-surface-container hover:border-primary text-primary transition-colors font-label-sm text-label-sm">All</button>
+<button class="px-4 py-2 rounded-full border border-outline-variant/30 bg-surface-container-low hover:border-primary hover:text-primary text-on-surface-variant transition-colors font-label-sm text-label-sm">Store</button>
+<button class="px-4 py-2 rounded-full border border-outline-variant/30 bg-surface-container-low hover:border-primary hover:text-primary text-on-surface-variant transition-colors font-label-sm text-label-sm">Spirits</button>
+<button class="px-4 py-2 rounded-full border border-outline-variant/30 bg-surface-container-low hover:border-primary hover:text-primary text-on-surface-variant transition-colors font-label-sm text-label-sm">Wine</button>
+<button class="px-4 py-2 rounded-full border border-outline-variant/30 bg-surface-container-low hover:border-primary hover:text-primary text-on-surface-variant transition-colors font-label-sm text-label-sm">Beer</button>
+<button class="px-4 py-2 rounded-full border border-outline-variant/30 bg-surface-container-low hover:border-primary hover:text-primary text-on-surface-variant transition-colors font-label-sm text-label-sm">Events</button>
+</section>
+<!-- Gallery Grid -->
+<section class="masonry-grid">
+<!-- Item 1 -->
+<div class="masonry-item rounded-xl overflow-hidden bg-[#1E1E1E] border border-[#2A2A2A] shadow-[0_20px_40px_rgba(0,0,0,0.4)] group cursor-pointer fade-in delay-200" onclick="openLightbox('https://images.unsplash.com/photo-1568213816046-0ee1c42bd559?q=80&amp;w=1000&amp;auto=format&amp;fit=crop')">
+<div class="relative overflow-hidden aspect-[3/4]">
+<img alt="Store Interior" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A moody, high-end liquor store interior featuring dark wooden shelves lined with an extensive collection of premium whiskey and bourbon bottles. The lighting is low and warm, casting soft amber glows on the glass. A subtle coastal elegance is implied by clean, minimalistic design elements and touches of matte brass. The overall aesthetic is rich, sophisticated, and exclusive." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOWnd1Cd_OBqHMhYst_L_CiEiSmJQ9yxfMsuQpXVaQSXlfdWjJQ99jiBNJ6lefaugIfuFDFF4rGiwN9P6mIhJySRfcobL6QoX3gnHD44u2usDqaKRHciXAakBH7IhAksEAir0uAYoiP9hZ854qiH5q1D64Y5KZCbtcitvI7KfRHNzNYzWq4QKwFnasgX-WB31fCHb-4vNxEfC9aWdHxxFLvC55vPpwTi59vTNDohafJcnPKfmqJlUkGqOO4uodPnq_m3uZELku0aIm"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="zoom_in">zoom_in</span>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="masonry-item rounded-xl overflow-hidden bg-[#1E1E1E] border border-[#2A2A2A] shadow-[0_20px_40px_rgba(0,0,0,0.4)] group cursor-pointer fade-in delay-300" onclick="openLightbox('https://images.unsplash.com/photo-1597075687490-8f673c6c17f6?q=80&amp;w=1000&amp;auto=format&amp;fit=crop')">
+<div class="relative overflow-hidden aspect-square">
+<img alt="Premium Spirits" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A close-up, premium shot of top-shelf tequila bottles resting on a sleek, dark stone counter. Ambient light gently reflects off the smooth glass, highlighting golden liquid inside. The background is softly blurred, emphasizing the high-contrast, minimalistic coastal sophistication of the environment. Warm amber and deep charcoal tones dominate the scene." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTepM3882yZ07nkROIFH352ETfkWT2Qxew-8JdCjx3IuhwH7hm8fcptPGJTJK6eZl4z3ZmoWJxfu9TOuuQiMW5ngjzR7ksbSU2VsZExDlvhuqy1x_WjJ2HXA1trI-IuSWhogpoQXdtVGzE6HQYJOjbN5lPwftYbPxTBEHbKZYREQLACGnQTl2QIoH2SA_9u-_UejwUkFmF7AtXryv1AJPqWgzBbFFWfG1lkNOwQOPvB78ZyhSN55K_srTxdwEuI2NblvGwPopWV34D"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="zoom_in">zoom_in</span>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="masonry-item rounded-xl overflow-hidden bg-[#1E1E1E] border border-[#2A2A2A] shadow-[0_20px_40px_rgba(0,0,0,0.4)] group cursor-pointer fade-in delay-100" onclick="openLightbox('https://images.unsplash.com/photo-1585553616435-2dc0a54e271d?q=80&amp;w=1000&amp;auto=format&amp;fit=crop')">
+<div class="relative overflow-hidden aspect-[4/3]">
+<img alt="Wine Cellar" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A sophisticated, modern wine cellar with floor-to-ceiling dark metal racks holding hundreds of carefully curated wine bottles. Soft, concealed LED strip lighting illuminates the labels, creating a dramatic, premium atmosphere. The room feels expansive yet intimate, echoing the brand's blend of high-end boutique and neighborhood warmth. Deep blacks and rich burgundy tones set the mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9ja5-r0zUgIAj1BoHMuZ7EqSj2q9Tw5KK31Tjj7APjE_HbY9erzdr_03_pJ9hHzn8RVqAwGcvDap7jedwLPGNXpwnnCDfGUckOzeYpB_1EOqt5CG-m57N7NbuylKq3vWIhPUs4P9kodHRUH3rCTIdrm-VvhjbKwcB7u0nPo71eh3ejT6NWpdfHlwDpRl1dgwHGGYep2LgOHHHX30cK3-iVUYxpW9p-_lzMD8uc5IRwVIteWsUB2g0CNpPjlzd85mllnulCKt1SBYl"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="zoom_in">zoom_in</span>
+</div>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="masonry-item rounded-xl overflow-hidden bg-[#1E1E1E] border border-[#2A2A2A] shadow-[0_20px_40px_rgba(0,0,0,0.4)] group cursor-pointer fade-in delay-200" onclick="openLightbox('https://images.unsplash.com/photo-1575037614876-c38db5ea8078?q=80&amp;w=1000&amp;auto=format&amp;fit=crop')">
+<div class="relative overflow-hidden aspect-video">
+<img alt="Craft Beer Section" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A meticulously organized craft beer cooler section in a high-end liquor store. The lighting is cool, crisp, and slightly ethereal, contrasting with the moody store interior. Rows of vibrantly labeled cans are perfectly aligned on dark glass shelves. The aesthetic bridges speakeasy darkness with modern, clean coastal minimalism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDScztQB6LaKQudPi_-S5RIHfndTvo1tUXx6S4FnTj8FVsLYda1nIilssqoL2-SVyRRw-4ksl0Hzd0LnQqo8ur06zN-WP7-ISD-uKbexzBw3xbY06zMQt-nlWpOl8Y_lTF-JrXBrzAZFb6GVWWPtmeGULmNtlsOqjmaq5Bi4NQDhyb9E7D4ykWHxWzJIjqE150LTSj2sEtXgM6s7UdpGVwJ11_-2_9-kjhrl_KuS2fEU3SzjUNqc4Qavp62Ryfi7HIme0MKoi8WJAzs"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="zoom_in">zoom_in</span>
+</div>
+</div>
+</div>
+<!-- Item 5 -->
+<div class="masonry-item rounded-xl overflow-hidden bg-[#1E1E1E] border border-[#2A2A2A] shadow-[0_20px_40px_rgba(0,0,0,0.4)] group cursor-pointer fade-in delay-300" onclick="openLightbox('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&amp;w=1000&amp;auto=format&amp;fit=crop')">
+<div class="relative overflow-hidden aspect-[3/4]">
+<img alt="Cocktail Event" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="An elegant cocktail pouring experience captured mid-action. A bartender is pouring a golden amber liquid into an intricate crystal glass over a large clear ice cube. The background is a moody, dark setting with soft out-of-focus golden lights. The visual style embodies high-contrast minimalism and tonal layering, exuding premium exclusivity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRbXki9N8auOrruUtcJkw-dpg2kyPaDiMP5l747ql92E8QwH9Xlu-2TVpBP4bl_rzOPx2UuYJn0Ozt7In4KP5y8z6JeVljxrnVJxOyYe8xQ1SEH3RQ7XW3qu72i4mJHKw77u2yO6mYI2dF-bf6ZoCih3SK0PZJEYVmjXiUUkcSnxInlEccgp22vAqwWHb_0HTvabCpnpZikOwHmRJjytlRWRp2RAlS0yktkE_H9zt9i0aetfkN_8wwC_Y79bq7falGTOoP4i4jvsbU"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="zoom_in">zoom_in</span>
+</div>
+</div>
+</div>
+<!-- Item 6 -->
+<div class="masonry-item rounded-xl overflow-hidden bg-[#1E1E1E] border border-[#2A2A2A] shadow-[0_20px_40px_rgba(0,0,0,0.4)] group cursor-pointer fade-in delay-100" onclick="openLightbox('https://images.unsplash.com/photo-1623934336025-fb306fb0c451?q=80&amp;w=1000&amp;auto=format&amp;fit=crop')">
+<div class="relative overflow-hidden aspect-square">
+<img alt="Whiskey Detail" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A macro shot of a vintage bourbon bottle label resting on a dark walnut wood surface. A single, dramatic spotlight highlights the gold foil details of the typography. The rest of the scene falls into deep, soft ambient shadows. The mood is rich, tactile, and highly sophisticated, reflecting an enthusiast's collection." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-rf93-y4P3o8EB9zIr3joP4K1dUcyRJ8deRyeCtzn6zlzZogsm_XVQzslOPGrxERzqqGKG-NN5VjFXQ0oDMCZ12BvPcbPLOuoP8hzsPW1-puccuGgBqABfhYQeIbiSeyCwwz0W4WkMM-5mKmnNTRkWN4Iw5eM0OGs6pImD45G-wMawVRcJ3pN_B8tg_jUlqEILK9Mn_Wl8mFtALa7jfg9JkIn7VRVjPkbsMWpvE2QCRVd0H80J2otNlLpfy9uVm69EsdHqnweBQ9l"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="zoom_in">zoom_in</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant/20 mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center px-margin-mobile md:px-margin-desktop py-gutter max-w-max-width mx-auto gap-base w-full">
+<div class="font-display-lg text-headline-lg text-primary mb-4 md:mb-0">Balport Liquors</div>
+<div class="flex flex-col md:flex-row gap-gutter font-body-md text-body-md text-on-surface-variant">
+<span class="hover:text-on-surface transition-colors">Address: 123 Coastal Way, Balport</span>
+<span class="hover:text-on-surface transition-colors">Phone: (555) 012-3456</span>
+<div class="flex gap-base">
+<a class="hover:text-primary transition-colors" href="#">Instagram</a>
+<a class="hover:text-primary transition-colors" href="#">Facebook</a>
+</div>
+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mt-4 md:mt-0">
+                © 2024 Balport Liquors. All rights reserved.
+            </div>
+</div>
+</footer>
+<!-- Lightbox Modal -->
+<div class="fixed inset-0 z-[70] bg-black/90 backdrop-blur-md hidden items-center justify-center opacity-0 transition-opacity duration-300" id="lightbox">
+<button class="absolute top-6 right-6 text-on-surface hover:text-primary transition-colors z-[80] p-2 bg-surface-container/50 rounded-full" onclick="closeLightbox()">
+<span class="material-symbols-outlined text-3xl" data-icon="close">close</span>
+</button>
+<img alt="Expanded View" class="max-w-[90vw] max-h-[795px] object-contain rounded-lg shadow-2xl scale-95 transition-transform duration-300" id="lightbox-img" src=""/>
+</div>
+<script>
+        // Drawer Logic
+        const menuBtn = document.getElementById('menu-btn');
+        const closeBtn = document.getElementById('close-drawer');
+        const drawer = document.getElementById('nav-drawer');
+        const overlay = document.getElementById('drawer-overlay');
+
+        function openDrawer() {
+            drawer.classList.remove('translate-x-full');
+            overlay.classList.remove('hidden');
+            // Small delay to allow display:block to apply before animating opacity
+            setTimeout(() => overlay.classList.add('opacity-100'), 10);
+        }
+
+        function closeDrawerFunc() {
+            drawer.classList.add('translate-x-full');
+            overlay.classList.remove('opacity-100');
+            setTimeout(() => overlay.classList.add('hidden'), 300);
+        }
+
+        menuBtn.addEventListener('click', openDrawer);
+        closeBtn.addEventListener('click', closeDrawerFunc);
+        overlay.addEventListener('click', closeDrawerFunc);
+
+        // Lightbox Logic
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        function openLightbox(src) {
+            lightboxImg.src = src;
+            lightbox.classList.remove('hidden');
+            lightbox.classList.add('flex');
+            
+            // Trigger reflow
+            void lightbox.offsetWidth;
+            
+            lightbox.classList.remove('opacity-0');
+            lightboxImg.classList.remove('scale-95');
+            lightboxImg.classList.add('scale-100');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.add('opacity-0');
+            lightboxImg.classList.remove('scale-100');
+            lightboxImg.classList.add('scale-95');
+            
+            setTimeout(() => {
+                lightbox.classList.remove('flex');
+                lightbox.classList.add('hidden');
+                lightboxImg.src = '';
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        // Close lightbox on background click
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+        
+        // Close lightbox on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) {
+                closeLightbox();
+            }
+        });
+    </script>
+</body></html>
