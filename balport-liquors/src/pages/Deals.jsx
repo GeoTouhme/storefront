@@ -85,7 +85,7 @@ function Deals() {
             <h1 className="deals-header__title font-display-lg">This Week's Deals</h1>
             <p className="deals-header__date font-body-lg">
               <span className="material-symbols-outlined" style={{ fontSize: '16px', verticalAlign: 'middle', marginRight: '6px' }}>event</span>
-              Valid until October 24, 2024
+              Valid for limited time.
             </p>
           </div>
           <div className="deals-filters">
